@@ -1,0 +1,238 @@
+{% load static %} 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encuesta de redes sociales</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body class="night">
+    <!-- <h1>Hola mundos</h1>
+    {% for item in person %}
+        <p>{{item.email}} {{item.age}}</p>
+    {% endfor %} -->
+    <div class="grid">
+        <div class="change">
+            <div class="change-color">
+                <div id="sun-moon" class="sun-moon"></div>
+            </div>
+        </div>
+        <div class="grid-layout">
+            <div class="form-img">
+                <img src="{% static 'img/social_media.svg' %}" alt="Social media" />
+            </div>
+            <div class="form-registre">
+                <div id="barprogess">
+                    <ul id="progressbar">
+                        <li class="active">Datos del participante</li>
+                        <li>Redes sociales</li>
+                    </ul>
+                </div>
+                <form method="post" id="form-poll">
+                    {% csrf_token %}
+                    <div class="title-registre">
+                        <h2>Encuesta de redes sociales</h2>
+                    </div>
+                    <!-- Datos del participante -->
+                    <fieldset class="row" id="firstRegistre">
+                        <legend>Datos del participante</legend>
+                        <div class="formulario-input" id="grupo-email">
+                            <div class="container email">    
+                                <input type="email" class="input" id="email" placeholder="Correo Electrónico"
+                                    name="{{form.email.name}}" >
+                                <label for="email" data-content="Correo Electrónico">
+                                    <span>Correo Electrónico</span>
+                                </label>
+                            </div>
+                            <div class="input-error" id="input-error-email">
+                                <p>
+                                    El correo debe llevar letras o números seguido con su
+                                    terminación de arroba.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="sub-container group">
+                            <div class="formulario-input" id="grupo-age">
+                                <div class="container">
+                                    <select name="{{form.age.name}}" id="age" class="select" >
+                                        <option value="0" disabled label="Seleccione un rango de edad" selected>
+                                        </option>
+                                        <option value="18-25">18-25</option>
+                                        <option value="26-33">26-33</option>
+                                        <option value="34-40">34-40</option>
+                                        <option value="40+">40+</option>
+                                    </select>
+                                </div>
+                                <div class="input-error" id="input-error-age">
+                                    <p>Debes seleccionar un rango de edad.</p>
+                                </div>
+                            </div>
+                            <div class="formulario-input" id="grupo-gender">
+                                <div class="container">
+                                    <select name="gender" id="{{form.gender.name}}" class="select" >
+                                        <option value="0" disabled label="Seleccione un genero" selected></option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Femenino">Femenino</option>
+                                    </select>
+                                </div>
+                                <div class="input-error" id="input-error-gender">
+                                    <p>Debe seleccionar un genero.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container next">
+                            <input type="button" value="Siguiente" id="next" />
+                        </div>
+                    </fieldset>
+                    <!-- Redes sociales -->
+                    <fieldset class="row" id="secondRegistre">
+                        <legend>Redes sociales</legend>
+                        <div class="sub-container group">
+                            <div class="formulario-input" id="grupo-favorite_social">
+                                <div class="container">
+                                    <input type="text" class="input" id="favorite_social"
+                                        placeholder="Red social favorita" name="{{form.favorite_social.name}}" >
+                                    <label for="favorite_social" data-content="Red social favorita">
+                                        <span>Red social favorita</span>
+                                    </label>
+                                </div>
+                                <div class="input-error" id="input-error-social">
+                                    <p>El campo de red social no puede contener número y no puede estar vacío.</p>
+                                </div>
+                            </div>
+                            <div class="formulario-input" id="grupo-social-facebook">
+                                <div class="container">
+                                    <select name="{{form.time_day_facebook.name}}" id="time_day_facebook" class="select" >
+                                        <option value="0" label="Tiempo promedio al día en Facebook" selected disabled>
+                                        </option>
+                                        <option value="1 hora">1 hora</option>
+                                        <option value="2 horas">2 horas</option>
+                                        <option value="3 horas">3 horas</option>
+                                        <option value="4 horas">4 horas</option>
+                                        <option value="5 horas">5 horas</option>
+                                        <option value="6 horas">+6 horas</option>
+                                    </select>
+                                </div>
+                                <div class="input-error" id="input-error-facebook">
+                                    <p>
+                                        Debes seleccionar un tiempo promedio al día en Facebook.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-container group">
+                            <div class="formulario-input" id="grupo-social-whatsapp">
+                                <div class="container">
+                                    <select name="{{form.time_day_whatsapp.name}}" id="time_day_whatsapp" class="select" >
+                                        <option value="0" disabled selected label="Tiempo promedio al día en WhatsApp
+                                        "></option>
+                                        <option value="1 hora">1 hora</option>
+                                        <option value="2 horas">2 horas</option>
+                                        <option value="3 horas">3 horas</option>
+                                        <option value="4 horas">4 horas</option>
+                                        <option value="5 horas">5 horas</option>
+                                        <option value="6 horas">+6 horas</option>
+                                    </select>
+                                </div>
+                                <div class="input-error" id="input-error-whatssapp">
+                                    <p>
+                                        Debes seleccionar un tiempo promedio al día en WhatsApp.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="formulario-input" id="grupo-social-twitter">
+                                <div class="container">
+                                    <select name="{{form.time_day_twitter.name}}" id="time_day_twitter" class="select" >
+                                        <option value="0" disabled selected label="Tiempo promedio al día en Twitter
+                                        "></option>
+                                        <option value="1 hora">1 hora</option>
+                                        <option value="2 horas">2 horas</option>
+                                        <option value="3 horas">3 horas</option>
+                                        <option value="4 horas">4 horas</option>
+                                        <option value="5 horas">5 horas</option>
+                                        <option value="6 horas">+6 horas</option>
+                                    </select>
+                                </div>
+                                <div class="input-error" id="input-error-twitter">
+                                    <p>
+                                        Debes seleccionar un tiempo promedio al día en Twitter.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-container group">
+                            <div class="formulario-input" id="grupo-social-instagram">
+                                <div class="container">
+                                    <select name="{{form.time_day_instagram.name}}" id="time_day_instagram" class="select" >
+                                        <option value="0" disabled selected label="Tiempo promedio al día en Instagram
+                                        "></option>
+                                        <option value="1 hora">1 hora</option>
+                                        <option value="2 horas">2 horas</option>
+                                        <option value="3 horas">3 horas</option>
+                                        <option value="4 horas">4 horas</option>
+                                        <option value="5 horas">5 horas</option>
+                                        <option value="6 horas">+6 horas</option>
+                                    </select>
+                                </div>
+                                <div class="input-error" id="input-error-instagram">
+                                    <p>
+                                        Debes seleccionar un tiempo promedio al día en Instagram.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="formulario-input" id="grupo-social-tiktok">
+                                <div class="container">
+                                    <select name="{{form.time_day_tiktok.name}}" id="time_day_tiktok" class="select" >
+                                        <option value="0" disabled selected label="Tiempo promedio al día en Tiktok
+                                        "></option>
+                                        <option value="1 hora">1 hora</option>
+                                        <option value="2 horas">2 horas</option>
+                                        <option value="3 horas">3 horas</option>
+                                        <option value="4 horas">4 horas</option>
+                                        <option value="5 horas">5 horas</option>
+                                        <option value="6 horas">+6 horas</option>
+                                    </select>
+                                </div>
+                                <div class="input-error" id="input-error-tiktok">
+                                    <p>
+                                        Debes seleccionar un tiempo promedio al día en Tiktok.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container submit">
+                            <div class="sub-container">
+                                <input type="button" value="Regresar" id="back" />
+                                <!-- Enviar formulario -->
+                                <input type="submit" value="Guardar" />
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="formulario-input" id="grupo-message-succeful">
+                        <div class="form-succeful">
+                            <p><i class="fas fa-check-circle"></i>Encuesta Enviada correctamente</p>
+                        </div>
+                    </div>
+                    <div class="formulario-input" id="grupo-message-error">
+                        <div class="form-error">
+                            <p>
+                                <span><i class="fas fa-exclamation-triangle"></i>Error:
+                                </span>
+                                Por favor debes llenar todos los campos del formulario.
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/validate.js' %}"></script>
+</body>
+
+</html>
